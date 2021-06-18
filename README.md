@@ -1,7 +1,7 @@
 # Hierarchical Lang
 
-> i just had a stupid idea
-> hacky minecraft mixin that enables "hierarchical lang files"
+> i just had a stupid idea  
+> hacky minecraft mixin that enables "hierarchical lang files"  
 > so instead of
 
 ```json
