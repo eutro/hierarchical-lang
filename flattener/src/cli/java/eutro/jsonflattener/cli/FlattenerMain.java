@@ -19,8 +19,8 @@ public class FlattenerMain {
     static void runCli(Function<JsonObject, JsonObject> mapper, String[] args) throws IOException {
         List<Closeable> toClose = new ArrayList<>();
         Charset charset = Charset.defaultCharset();
-        Appendable out = System.out;
-        Reader in = new InputStreamReader(System.in);
+        Appendable out = null;
+        Reader in = null;
         GsonBuilder builder = new GsonBuilder();
         for (int i = 0; i < args.length; i++) {
             String arg = args[i];
@@ -73,8 +73,8 @@ public class FlattenerMain {
             }
         }
         Gson gson = builder.create();
-        JsonObject object = gson.fromJson(in, JsonObject.class);
-        gson.toJson(mapper.apply(object), out);
+        JsonObject object = gson.fromJson(in == null ? new InputStreamReader(System.in, charset) : in, JsonObject.class);
+        gson.toJson(mapper.apply(object), out == null ? new OutputStreamWriter(System.out, charset) : out);
         for (Closeable closeable : toClose) {
             closeable.close();
         }
