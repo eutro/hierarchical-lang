@@ -37,6 +37,8 @@
 
 > that's actually real easy i think
 
+---
+
 [JsonFlattener]: flattener/src/main/java/eutro/jsonflattener/JsonFlattener.java
 
 1. Depend on [JsonFlattener] at build/datagen time.
@@ -46,6 +48,27 @@
         - Build locally and publish to Maven local, then depend on that.
         - Use any other cursed dependency system you want to use.
 2. Flatten your generated or handwritten Json using the `flatten` method of [JsonFlattener].
+
+---
+
+Alternatively, use the Gradle plugin:
+
+1. Apply the plugin:
+```kotlin
+plugins {
+    id("eutro.hierarchical-lang") version "<version>"
+}
+```
+2. `flattenJson` any lang files:
+```kotlin
+tasks.processResources {
+    from("en_us.json") {
+        flattenJson(this)
+    }
+}
+```
+
+---
 
 > ...it does mean that datapackers don't get the same luxury though
 

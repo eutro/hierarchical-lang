@@ -1,5 +1,5 @@
 rootProject.name = "hierarchical-lang"
-include("flattener", "hierarchical-lang")
+include("flattener", "hierarchical-lang", "hierarchical-lang-gradle")
 
 pluginManagement {
     repositories {
