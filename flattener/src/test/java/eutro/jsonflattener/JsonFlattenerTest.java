@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,20 +28,41 @@ public class JsonFlattenerTest {
     }
 
     @Test
-    public void testFlattening() {
-        JsonObject flat = getGsonFromResource("/flat.json");
-        JsonObject hierarchical = getGsonFromResource("/hierarchical.json");
+    public void testFlatten() {
+        JsonObject flat = getGsonFromResource("/flatten/flat.json");
+        JsonObject hierarchical = getGsonFromResource("/flatten/hierarchical.json");
         assertEquals(flat, JsonFlattener.flatten(hierarchical));
     }
 
     @Test
     public void testAlreadyFlat() {
-        JsonObject flat = getGsonFromResource("/flat.json");
+        JsonObject flat = getGsonFromResource("/flatten/flat.json");
         assertEquals(flat, JsonFlattener.flatten(flat));
     }
 
     @Test
-    public void testEmpty() {
-        assertEquals(new JsonObject(), JsonFlattener.flatten(new JsonObject()));
+    public void testExpand() {
+        JsonObject flat = getGsonFromResource("/expand/flat.json");
+        JsonObject expanded = getGsonFromResource("/expand/expanded.json");
+        assertEquals(expanded, JsonExpander.expand(flat));
+    }
+
+    @Test
+    public void testAlreadyExpanded() {
+        JsonObject expanded = getGsonFromResource("/expand/expanded.json");
+        assertEquals(expanded, JsonExpander.expand(expanded));
+    }
+
+    @Test
+    public void testEmptyFlatten() {
+        JsonObject empty = new JsonObject();
+        assertEquals(empty, JsonFlattener.flatten(empty));
+        assertEquals(empty, JsonExpander.expand(empty));
+    }
+
+    @Test
+    public void testEmptyExpand() {
+        JsonObject empty = new JsonObject();
+        assertEquals(empty, JsonExpander.expand(empty));
     }
 }

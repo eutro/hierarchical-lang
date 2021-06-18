@@ -60,6 +60,7 @@ public class JsonFlattener {
      *
      * @param object The object to flatten.
      * @return A new, flattened Json Object.
+     * @see JsonExpander#expand(JsonObject)
      */
     public static JsonObject flatten(JsonObject object) {
         JsonObject flat = new JsonObject();

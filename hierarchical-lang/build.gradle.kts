@@ -1,18 +1,10 @@
 plugins {
     id("fabric-loom") version "0.9-SNAPSHOT"
-    id("maven-publish")
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-    withSourcesJar()
+    `maven-publish`
 }
 
 base {
     archivesBaseName = properties["archives_base_name"] as String
-    version = properties["mod_version"] as String
-    group = properties["maven_group"] as String
 }
 
 dependencies {

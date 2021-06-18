@@ -1,17 +1,9 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
 plugins {
     java
     `maven-publish`
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-    withSourcesJar()
-}
-
-base {
-    version = "1.0.0"
-    group = "eutro"
+    id("com.github.johnrengelman.shadow") version "7.0.0"
 }
 
 repositories {
@@ -25,6 +17,40 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+sourceSets {
+    register("cli") {
+        compileClasspath += main.get().compileClasspath
+        runtimeClasspath += main.get().compileClasspath
+        compileClasspath += main.get().output
+        runtimeClasspath += main.get().output
+    }
+}
+
+tasks.register<ShadowJar>("flattenerJar") {
+    archiveClassifier.set("flattener-cli")
+    from(sourceSets.main.get().output)
+    from(sourceSets["cli"].output)
+    configurations = mutableListOf(project.configurations.compileClasspath.get())
+    manifest {
+        attributes("Main-Class" to "eutro.jsonflattener.cli.FlattenerMain")
+    }
+}
+
+tasks.register<ShadowJar>("expanderJar") {
+    archiveClassifier.set("expander-cli")
+    from(sourceSets.main.get().output)
+    from(sourceSets["cli"].output)
+    configurations = mutableListOf(project.configurations.compileClasspath.get())
+    manifest {
+        attributes("Main-Class" to "eutro.jsonflattener.cli.ExpanderMain")
+    }
+}
+
+tasks.build {
+    dependsOn("flattenerJar")
+    dependsOn("expanderJar")
 }
 
 publishing {
