@@ -60,10 +60,19 @@ plugins {
 }
 ```
 2. `flattenJson` any lang files:
+- Kotlin
 ```kotlin
 tasks.processResources {
-    from("en_us.json") {
+    from("/**/lang/en_us.json") {
         flattenJson(this)
+    }
+}
+```
+- Groovy
+```groovy
+tasks.processResources {
+    from("/**/lang/en_us.json") {
+        flattenJson.invoke(it)
     }
 }
 ```

@@ -2,6 +2,8 @@ plugins {
     id("eutro.hierarchical-lang") version "1.1.1"
 }
 
+apply("groovybuild.groovy")
+
 tasks.register<Copy>("copyTask") {
     destinationDir = file("out")
     from("src/expand_me.json") {
