@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import java.util.Map;
 
 /**
- * A class that flattens Gson Json Objects.
+ * A class that provides methods for flattening Gson Json Objects.
  */
 public class JsonFlattener {
     /**

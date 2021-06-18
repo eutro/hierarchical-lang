@@ -34,7 +34,7 @@ tasks.withType<JavaCompile> {
 }
 
 tasks.jar {
-    from("LICENSE") {
+    from("${rootProject.projectDir}/LICENSE") {
         rename { "${it}_${base.archivesBaseName}" }
     }
     from(project(":flattener").tasks.compileJava.get().outputs)
