@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "hierarchicallang",
+  "version": "${version}",
+  "name": "Hierarchical Lang",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/hierarchical-lang/icon.png",
+  "environment": "client",
+  "entrypoints": {},
+  "mixins": [
+    "hierarchical-lang.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.11.6",
+    "minecraft": "1.17"
+  }
+}
