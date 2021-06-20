@@ -2,7 +2,7 @@ plugins {
     java
 }
 
-allprojects {
+subprojects {
     apply(plugin = "java")
 
     java {

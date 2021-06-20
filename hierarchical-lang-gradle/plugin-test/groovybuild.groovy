@@ -1,7 +1,7 @@
 tasks.register("copyTaskGroovy", Copy) {
     destinationDir = file("out")
     from("src/expand_me.json") {
-        expandJson(it) {
+        expandJson.invoke(it) {
             it.setPrettyPrinting()
         }
     }
