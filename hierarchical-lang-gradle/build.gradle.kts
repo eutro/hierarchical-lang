@@ -1,6 +1,7 @@
 plugins {
     id("com.gradle.plugin-publish") version "0.15.0"
     `java-gradle-plugin`
+    `maven-publish`
 }
 
 repositories {
