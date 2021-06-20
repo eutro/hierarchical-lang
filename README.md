@@ -63,7 +63,7 @@ plugins {
 - Kotlin
 ```kotlin
 tasks.processResources {
-    from("/**/lang/en_us.json") {
+    filesMatching("**/lang/*.json") {
         flattenJson(this)
     }
 }
@@ -71,7 +71,7 @@ tasks.processResources {
 - Groovy
 ```groovy
 tasks.processResources {
-    from("/**/lang/en_us.json") {
+    filesMatching("**/lang/*.json") {
         flattenJson.invoke(it)
     }
 }
