@@ -1,5 +1,5 @@
 plugins {
-    id("eutro.hierarchical-lang") version "1.1.1"
+    id("com.github.eutro.hierarchical-lang") version "1.1.1"
 }
 
 apply("groovybuild.groovy")

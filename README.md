@@ -56,7 +56,7 @@ Alternatively, use the Gradle plugin:
 1. Apply the plugin:
 ```kotlin
 plugins {
-    id("eutro.hierarchical-lang") version "<version>"
+    id("com.github.eutro.hierarchical-lang") version "<version>"
 }
 ```
 2. `flattenJson` any lang files:
