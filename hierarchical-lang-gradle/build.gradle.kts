@@ -1,10 +1,16 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation
+import groovy.namespace.QName
+import groovy.util.Node
 
 plugins {
     id("com.gradle.plugin-publish") version "0.15.0"
     id("com.github.johnrengelman.shadow") version "7.0.0"
     `java-gradle-plugin`
     `maven-publish`
+}
+
+base {
+    version = "1.1.2"
 }
 
 repositories {
@@ -20,7 +26,7 @@ dependencies {
 }
 
 tasks.register<ConfigureShadowRelocation>("relocateShadowJar") {
-    prefix = "${project.group}.${base.archivesBaseName}.shadow"
+    prefix = "eutro.hierarchicallang.shadow"
     target = tasks.shadowJar.get()
 }
 
@@ -85,6 +91,19 @@ afterEvaluate {
                             tasks["publishPluginJavaDocsJar"]
                         )
                     )
+                }
+                pom {
+                    withXml {
+                        asNode().run {
+                            for (child in children()) {
+                                if (child is Node && child.name().let {
+                                        it is QName && it.localPart == "dependencies"
+                                    }) {
+                                    child.children().clear()
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

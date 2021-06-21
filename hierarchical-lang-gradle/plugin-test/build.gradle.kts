@@ -1,5 +1,5 @@
 plugins {
-    id("com.github.eutro.hierarchical-lang") version "1.1.1"
+    id("com.github.eutro.hierarchical-lang") version "1.1.2"
 }
 
 apply("groovybuild.groovy")
@@ -15,17 +15,5 @@ tasks.register<Copy>("copyTask") {
         flattenJson(this) {
             setPrettyPrinting()
         }
-    }
-    from("src/add_something.json") {
-        filter(
-            mapOf(
-                "transformer" to eutro.hierarchicallang.JsonTransformer {
-                    it.addProperty("added", "value")
-                    it
-                },
-                "outGson" to com.google.gson.GsonBuilder().setPrettyPrinting().create()
-            ),
-            eutro.hierarchicallang.JsonFilterReader::class.java
-        )
     }
 }
